@@ -3,6 +3,8 @@ name: "CodeQL Analysis"
 on:
   pull_request:
     branches: [ main ]
+  push:
+    branches: [ main ]
 
 jobs:
   analyze:
@@ -21,6 +23,7 @@ jobs:
         uses: github/codeql-action/init@v3  # See version note below
         with:
           languages: python  # Don't forget to specify your language!
+          queries: security-extended
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
