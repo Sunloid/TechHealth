@@ -1,19 +1,26 @@
 name: "CodeQL Analysis"
+
 on:
- pull_request:
-   branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
-  analyze:
-    name: Analyze
-    runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      actions: read    # Added: Highly recommended for CodeQL to check status
-      contents: read   # Added: Required for checking out the private/public code
-    steps:
-     - name: Checkout repository
-       uses: actions/checkout@v4
-     - name: Initialize CodeQL
-       uses: github/codeql-action/init@v3
-     - name: Perform CodeQL Analysis
-       uses: github/codeql-action/analyze@v3
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read    # Added: Highly recommended for CodeQL to check status
+      contents: read   # Added: Required for checking out the private/public code
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4  # Upgraded to v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3  # See version note below
+        with:
+          languages: python  # Don't forget to specify your language!
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
